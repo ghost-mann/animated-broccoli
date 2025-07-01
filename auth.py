@@ -31,3 +31,10 @@ def register():
         return redirect(url_for('auth.login'))
     return render_template('register.html')
 
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+        
+        
