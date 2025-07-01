@@ -5,12 +5,9 @@ from dotenv import load_dotenv
 from models import User,db
 import os
 
-
 load_dotenv()
 
-
 app = Flask(__name__)
-
 
 @app.route('/')
 def home():
