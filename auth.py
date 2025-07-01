@@ -15,3 +15,19 @@ def login():
             return redirect(url_for('home'))
         flash('Invalid login credentials')
         return render_template('login.html')
+
+@auth.route('/register')
+def register():
+    if request.method == 'POST':
+        hashed_pw = generate_password_hash(request.form['password'], method='sha256')
+        new_user = User(
+            username = request.form['username'],
+            email = request.form['email'],
+            password = hashed_pw
+        )
+        db.session.add(new_user)
+        db.session.commit
+        flash('Registered successfully now login!')
+        return redirect(url_for('auth.login'))
+    return render_template('register.html')
+
