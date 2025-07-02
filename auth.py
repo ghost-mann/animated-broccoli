@@ -16,10 +16,10 @@ def login():
         flash('Invalid login credentials')
         return render_template('login.html')
 
-@auth.route('/register')
+@auth.route('/register', methods=['GET','POST'])
 def register():
     if request.method == 'POST':
-        hashed_pw = generate_password_hash(request.form['password'], method='sha256')
+        hashed_pw = generate_password_hash(request.form['password'], method='pbkdf2:sha256')
         new_user = User(
             username = request.form['username'],
             email = request.form['email'],
